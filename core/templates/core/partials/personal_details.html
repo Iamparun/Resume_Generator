@@ -1,0 +1,22 @@
+
+
+{% if personal_details %}
+    <!-- Display personal details if they exist -->
+    <p><strong>Full Name:</strong> {{ personal_details.full_name }}</p>
+    <p><strong>Email:</strong> {{ personal_details.email }}</p>
+    <p><strong>Phone:</strong> {{ personal_details.phone }}</p>
+    <p><strong>Address:</strong> {{ personal_details.address }}</p>
+    
+{% else %}
+    <!-- Show form to save personal details if they don't exist -->
+    <form method="post" action="{% url 'save_personal_details' %}">
+        {% csrf_token %}
+        {{ personal_form.as_p }}
+        <button type="submit" class="btn btn-success">Save Personal Details</button>
+    </form>
+       <!-- Buttons for Edit and Delete -->
+       <div class="personal-details-actions">
+        <a href="{% url 'edit_personal_details'  %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'delete_personal_details' %}" class="btn btn-danger btn-sm">Delete</a>
+    </div>
+{% endif %}

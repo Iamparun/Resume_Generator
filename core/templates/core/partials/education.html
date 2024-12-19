@@ -1,0 +1,17 @@
+
+<form method="POST" action="{% url 'add_education' %}">
+    {% csrf_token %}
+    {{ education_form.as_p }}
+    <button type="submit" class="btn btn-primary">Add Education</button>
+</form>
+
+<ul>
+    {% for edu in education %}
+        <li>
+            {{ edu.degree }} in {{ edu.field_of_study }} at {{ edu.institution_name }}
+            ({{ edu.start_date }} - {{ edu.end_date|default:"Present" }})
+            <a href="{% url 'edit_education' edu.id %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'delete_education' edu.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </li>
+    {% endfor %}
+</ul>

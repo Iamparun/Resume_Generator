@@ -1,0 +1,15 @@
+
+<form method="post" action="{% url 'add_skill' %}">
+    {% csrf_token %}
+    {{ skill_form.as_p }}
+    <button type="submit" class="btn btn-primary">Add Skill</button>
+</form>
+<ul>
+    {% for skill in skills %}
+        <li>
+            {{ skill.name }}
+            <a href="{% url 'edit_skill' skill.id %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'delete_skill' skill.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
